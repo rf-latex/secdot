@@ -1,7 +1,5 @@
 \documentclass[pagesize=auto, fontsize=12pt, DIV=10, parskip=half]{scrartcl}
 
-\usepackage{fixltx2e}
-\usepackage{etex}
 \usepackage{lmodern}
 \usepackage[T1]{fontenc}
 \usepackage{textcomp}
@@ -35,30 +33,31 @@
   escapechar=\$%
 }
 
-\title{The \pkg{secdot} package\thanks{This manual corresponds to \pkg{secdot.sty}~v2.0, dated~July 2000.}}
+\title{The \pkg{secdot} package\thanks{This manual corresponds to \pkg{secdot.sty}~v1.1, dated~May 11 2026.}}
 \subtitle{Define section numbers with dots}
 \author{%
-  Robin Fairbairns\thanks{\mail{rf10@cl.cam.ac.uk}}%
-  \and Steve Grathwohl\thanks{Duke University}%
+  Robin Fairbairns\and
+  \and Steve Grathwohl\and
+  \LaTeX\ Team\thanks{\url{https://github.com/rf-latex}}
 }
-\date{July 2000}
+\date{May 11 2026}
 
 
 \begin{document}
 
 \maketitle
 
-the package as loaded causes section numbers to be output with a dot
+The package as loaded causes section numbers to be output with a dot
 after them.
 
-the command \cmd{\sectiondot}\marg{level} will make `\meta{level}' sections also be
+The command \cmd{\sectiondot}\marg{level} will make `\meta{level}' sections also be
 output with a dot after them -- an example of use would be:
 %
 \begin{lstlisting}
 \sectiondot{subsection}
 \end{lstlisting}
 
-the command \cmd{\sectionpunct}\marg{level}\marg{punctuation} gives finer
+The command \cmd{\sectionpunct}\marg{level}\marg{punctuation} gives finer
 control.  examples of use would be
 %
 \begin{lstlisting}
@@ -67,13 +66,20 @@ control.  examples of use would be
 \sectionpunct{section}{\quad} % restores default latex behaviour
 \end{lstlisting}
 
-other eccentricities of numbering could be coded by those with
+Other eccentricities of numbering could be coded by those with
 stronger stomachs, by defining the appropriate
 %
 \begin{lstlisting}
 \csname @seccntfmt@$\meta{level}$\endcsname
 \end{lstlisting}
 %
-which macro will take one argument, when invoked: the `\meta{level}' name
+which macro will take one argument, when invoked: the `\meta{level}' name.
+
+If \verb|\DocumentDocumentMetadata| is used, section headings are
+implemented via \LaTeX\ templates which offer much more flexible
+customisation, and this package is not recommended for new documents.
+However a basic set of \verb|\EditInstance| declarations are included
+in this package so that the basic functionality still works in
+combination with \verb|\DocumentDocumentMetadata|.
 
 \end{document}
