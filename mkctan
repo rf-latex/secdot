@@ -1,0 +1,5 @@
+#!/bin/bash
+pdflatex secdot.ltx
+cd ..
+zip secdot.zip secdot/{README.md,secdot.ltx,secdot.sty,secdot.pdf}
+mv secdot.zip secdot
