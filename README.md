@@ -1,2 +1,7 @@
-# secdot
+# secdot package
+
 Section numbers with trailing dots
+
+Makes the numbers of `\section` commands come out with a trailing
+dot. Includes a command whereby the same can be made to happen with
+other sectioning commands.
