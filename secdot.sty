@@ -1,10 +1,13 @@
 %  Define section numbers with dots
 %
-% Author: Robin Fairbairns (rf10@cl.cam.ac.uk)
+% Author: Robin Fairbairns 
 %         first version, June 2000
 %
-%         version 2, July 2000, with a contribution from
+%         version 1.0, July 2000, with a contribution from
 %         Steve Grathwohl of Duke University
+%
+%         Version 1.1 May 2026 some support for section templates
+%         LaTeX Team.
 %
 % This program may be distributed and/or modified under the
 % conditions of the LaTeX Project Public License, either version 1.1
@@ -17,8 +20,8 @@
 % This program consists of the file secdot.sty
 % documentation (such as it is) may be found after \endinput herein
 
-\NeedsTeXFormat{LaTeX2e}% Seems to work with any version
-\ProvidesPackage{secdot}[2000/06/20 v1.0 section numbers with dots]
+\NeedsTeXFormat{LaTeX2e}%
+\ProvidesPackage{secdot}[2026 -11-05 v1.1 section numbers with dots]
 
 % command to declare a particular section level to have a dot after
 % its number
@@ -43,27 +46,51 @@
   {\csname the#1\endcsname\quad}% original default style
   {\csname @seccntfmt@#1\endcsname{#1}}%
 }
+
+% Minimal support for section heading instances if \DocumentMetadat
+% is used
+\ifdefined\IfInstanceExistsT
+\IfInstanceExistsT{headformat}{section}{%
+\EditInstance{heading}{section}{number-format=\@seccntformat{section}}
+\EditInstance{heading}{subsection}{number-format=\@seccntformat{subsection}}
+\EditInstance{heading}{subsubsection}{number-format=\@seccntformat{subsubsection}}
+\EditInstance{heading}{paragraph}{number-format=\@seccntformat{paragraph}}
+\EditInstance{heading}{subparagraph}{number-format=\@seccntformat{subparagraph}}
+\EditInstance{headformat}{paragraph}{number-title-sep=0pt}
+\EditInstance{headformat}{subparagraph}{number-title-sep=0pt}
+\EditInstance{headformat}{section}{number-title-sep=0pt}
+\EditInstance{headformat}{subsection}{number-title-sep=0pt}
+\EditInstance{headformat}{subsubsection}{number-title-sep=0pt}
+}
+\fi
 \endinput
 
 secdot.sty: section numbers with dots
 =====================================
 
-the package as loaded causes section numbers to be output with a dot
+The package as loaded causes section numbers to be output with a dot
 after them.
 
-the command \sectiondot{<level>} will make `level' sections also be
+The command \sectiondot{<level>} will make `level' sections also be
 output with a dot after them -- an example of use would be:
    \sectiondot{subsection}
 
-the command \sectionpunct{<level>}{<punctuation>} gives finer
+The command \sectionpunct{<level>}{<punctuation>} gives finer
 control.  examples of use would be
    \sectionpunct{section}{. } % \sectiondot places a \quad after the
                               % dot, which may look excessive
    \sectionpunct{section}{\quad} % restores default latex behaviour
 
-other eccentricities of numbering could be coded by those with
+Other eccentricities of numbering could be coded by those with
 stronger stomachs, by defining the appropriate
 
    \csname @seccntfmt@<level>\endcsname
 
 which macro will take one argument, when invoked: the `level' name
+
+If \DocumentDocumentMetadata is used, section headings are
+implemented via LaTeX templates which offer much more flexible
+customisation, and this package is not recommended for new documents.
+However, a basic set of \EditInstance declarations are included
+in this package so that the basic functionality still works in
+combination with \DocumentDocumentMetadata.
