@@ -50,7 +50,7 @@
 % Minimal support for section heading instances if \DocumentMetadat
 % is used
 \ifdefined\IfInstanceExistsT
-\IfInstanceExistsT{heading}{section}{%
+\IfInstanceExistsT{headformat}{section}{%
 \EditInstance{heading}{section}{number-format=\@seccntformat{section}}
 \EditInstance{heading}{subsection}{number-format=\@seccntformat{subsection}}
 \EditInstance{heading}{subsubsection}{number-format=\@seccntformat{subsubsection}}
